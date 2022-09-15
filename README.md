@@ -28,13 +28,15 @@ Check sync
 `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc": "2.0", "method":
 "eth_blockNumber", "params": [], "id":1}' localhost:8545`
 
-## Install Lighthouse  
+## Install Lighthouse 
+``` 
 cd ~; \
 mkdir lighthouse; \
 cd lighthouse ; \
 wget -O - https://github.com/sigp/lighthouse/releases/download/v3.1.0/lighthouse-v3.1.0-x86_64-unknown-linux-gnu.tar.gz | tar xzf -; \
 cp lighthouse ~/go/bin/ ; \
-lighthouse --version  
+lighthouse --version
+```
 
 ## Create Lighthouse service file  
 ```bash
