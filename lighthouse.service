@@ -13,7 +13,7 @@ CPUWeight=90
 IOWeight=90
 MemoryMax=100G
 
-WorkingDirectory=/root/erigon
+WorkingDirectory=/root/
 ExecStart=/root/go/bin/lighthouse beacon_node \
 --datadir="/root/lighthouse" \
 --network="mainnet" \
@@ -21,7 +21,7 @@ ExecStart=/root/go/bin/lighthouse beacon_node \
 --execution-endpoint="http://127.0.0.1:8551" \
 --http --http-address="127.0.0.1" \
 --http-allow-origin="*" \
---metrics --metrics-address="0.0.0.0" --metrics-port="44450" \
+--metrics --metrics-address="127.0.0.1" --metrics-port="44450" \
 --metrics-allow-origin="*" \
 --subscribe-all-subnets \
 --import-all-attestations \
