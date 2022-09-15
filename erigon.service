@@ -1,28 +1,28 @@
 [Unit]
-Description=erigon service
-After=network.target
+  Description="Erigon service"
+  After=network.target
 
 [Service]
-    Type=simple
-    Restart=always
-    RestartSec=3
+  Type=simple
+  Restart=always
+  RestartSec=3
   TimeoutStopSec=600
-    User=erigon
-    LimitNOFILE=65536
-    LimitNPROC=65536
-    CPUWeight=90
-    IOWeight=90
-    MemoryMax=100G
-    WorkingDirectory=/root/erigon
-    ExecStart=/root/go/bin/erigon \
-    --datadir mainnet --private.api.addr=127.0.0.1:9090 \
-    --torrent.download.rate=100mb --chain=mainnet --port=30303 \
-    --http.port=8545 --torrent.port=42069 \
-    --http --http.addr=127.0.0.1 --ws --http.api=eth,debug,net,trace,web3,txpool,erigon \
-    --metrics --metrics.addr="0.0.0.0" --metrics.port="44451" \
-    --authrpc.jwtsecret="/root/erigon/mainnet/jwt.hex" 
+  User=root
+  LimitNOFILE=65536
+  LimitNPROC=65536
+  CPUWeight=90
+  IOWeight=90
+  MemoryMax=100G
+  WorkingDirectory=/root/erigon
+  ExecStart=/root/go/bin/erigon \
+  --datadir mainnet --private.api.addr=127.0.0.1:9090 \
+  --torrent.download.rate=100mb --chain=mainnet --port=30303 \
+  --http.port=8545 --torrent.port=42069 \
+  --http --http.addr=127.0.0.1 --ws --http.api=eth,debug,net,trace,web3,txpool,erigon \
+  --metrics --metrics.addr="0.0.0.0" --metrics.port="44451" \
+  --authrpc.jwtsecret="/root/erigon/mainnet/jwt.hex" 
 
-    KillSignal=SIGHUP
+  KillSignal=SIGHUP
 
 [Install]
-WantedBy=multi-user.target
+  WantedBy=multi-user.target
