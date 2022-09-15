@@ -8,7 +8,7 @@ curl -s https://gist.githubusercontent.com/c29r3/3130b5cd51c4a94f897cc58443890c2
 ## Install Erigon  
 ```bash
 cd ~ \
-&& git clone https://github.com/ledgerwatch/erigon.git; \
+&& git clone https://github.com/ledgerwatch/erigon.git \
 && cd erigon \
 && git checkout alpha \
 && make erigon \
