@@ -27,3 +27,20 @@ journalctl -u erigon -f --no-hostname
 Check sync  
 `curl -X POST -H "Content-Type: application/json" --data '{"jsonrpc": "2.0", "method":
 "eth_blockNumber", "params": [], "id":1}' localhost:8545`
+
+## Install Lighthouse  
+cd ~; \
+mkdir lighthouse; \
+cd lighthouse ; \
+wget -O - https://github.com/sigp/lighthouse/releases/download/v3.1.0/lighthouse-v3.1.0-x86_64-unknown-linux-gnu.tar.gz | tar xzf -; \
+cp lighthouse ~/go/bin/ ; \
+lighthouse --version  
+
+## Create Lighthouse service file  
+```bash
+curl -s https://raw.githubusercontent.com/c29r3/graph-utils/main/lighthouse.service > /etc/systemd/system/lighthouse.service ; \
+systemctl daemon-reload ; \
+systemctl enable lighthouse ; \
+systemctl start lighthouse ; \
+journalctl -u lighthouse -f --no-hostname
+```
