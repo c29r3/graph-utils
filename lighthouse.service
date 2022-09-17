@@ -7,11 +7,7 @@ Restart=always
 RestartSec=3
 StartLimitInterval=0
 TimeoutStopSec=600
-LimitNOFILE=65536
-LimitNPROC=65536
-CPUWeight=90
-IOWeight=90
-MemoryMax=100G
+LimitNOFILE=200000
 
 WorkingDirectory=/root/
 ExecStart=/root/go/bin/lighthouse beacon_node \
