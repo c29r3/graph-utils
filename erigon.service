@@ -8,11 +8,7 @@
   RestartSec=3
   TimeoutStopSec=600
   User=root
-  LimitNOFILE=65536
-  LimitNPROC=65536
-  CPUWeight=90
-  IOWeight=90
-  MemoryMax=100G
+  LimitNOFILE=200000
   WorkingDirectory=/root/erigon
   ExecStart=/root/go/bin/erigon \
   --datadir mainnet --private.api.addr=127.0.0.1:9090 \
@@ -20,9 +16,9 @@
   --http.port=8545 --torrent.port=42069 \
   --http --http.addr=127.0.0.1 --ws --http.api=eth,debug,net,trace,web3,txpool,erigon \
   --metrics --metrics.addr="0.0.0.0" --metrics.port="44451" \
-  --authrpc.jwtsecret="/root/erigon/mainnet/jwt.hex" 
+  --authrpc.jwtsecret="/root/erigon/mainnet/jwt.hex"
 
   KillSignal=SIGHUP
 
 [Install]
-  WantedBy=multi-user.target
+WantedBy=multi-user.target
