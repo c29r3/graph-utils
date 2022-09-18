@@ -46,3 +46,49 @@ systemctl enable lighthouse ; \
 systemctl start lighthouse ; \
 journalctl -u lighthouse -f --no-hostname
 ```
+
+## Nethermind Archive_Node (testnet)
+
+```
+sudo apt update && \
+sudo add-apt-repository ppa:nethermindeth/nethermind && \
+sudo apt install nethermind -y && \
+sudo bash -c 'echo "nethermind soft nofile 1000000" > /etc/security/limits.d/nethermind.conf'
+```
+
+
+```
+echo '
+[Unit]
+Description=Nethermind Node
+After=network.target
+
+[Service]
+User=root
+#EnvironmentFile=/root/nethermind/data/.env
+WorkingDirectory=/root/nethermind
+Restart=on-failure
+LimitNOFILE=1000000
+ExecStart=/usr/bin/nethermind \
+  --datadir /root/nethermind/data \
+  --config xdai_archive \
+  --Merge.Enabled=True \
+  --Network.P2PPort=30303 \
+  --Network.DiscoveryPort=30303 \
+  --JsonRpc.Enabled=True \
+  --JsonRpc.Timeout=20000 \
+  --JsonRpc.Host="127.0.0.1" \
+  --JsonRpc.Port=8545 \
+  --JsonRpc.EnabledModules="Eth,Subscribe,Trace,TxPool,Web3,Personal,Proof,Net,Parity,Health" \
+  --JsonRpc.EnginePort=8551 \
+  --JsonRpc.EngineHost="127.0.0.1" \
+  --JsonRpc.JwtSecretFile="/root/nethermind/data/jwt-secret"
+
+
+[Install]
+WantedBy=default.target' > /etc/systemd/system/nethermind.service ; \
+sudo systemctl daemon-reload; \
+sudo systemctl enable nethermind; \
+sudo systemctl restart nethermind; \
+journalctl -u nethermind -f --no-hostname
+```
